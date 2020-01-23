@@ -52,6 +52,28 @@ describe("Employee", () => {
         });
     });
 
- 
+    describe("methods", () => {
+        it("should return the employee name", () => {
+            const obj = generateEmployeeObject(validData);
+            expect(obj.getName()).toEqual(validData.name);
+        });
+        it("should return the employee ID", () => {
+            const obj = generateEmployeeObject(validData);
+            expect(obj.getID()).toEqual(validData.id);
+        });
+        it("should return the employee title", () => {
+            const obj = generateEmployeeObject(validData);
+            expect(obj.getTitle()).toEqual(validData.title);
+        });
+        it("should return the employee email", () => {
+            const obj = generateEmployeeObject(validData);
+            expect(obj.getEmail()).toEqual(validData.email);
+        });
+        it("should return the employee role", () => {
+            const obj = generateEmployeeObject(validData);
+            expect(obj.getRole()).toEqual("Employee");
+        });
+    });
+
 
 });
