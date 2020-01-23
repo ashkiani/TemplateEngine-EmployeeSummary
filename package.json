@@ -1,0 +1,26 @@
+{
+  "name": "templateengine-employeesummary",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashkiani/TemplateEngine-EmployeeSummary.git"
+  },
+  "author": "Siavash Ashkiani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ashkiani/TemplateEngine-EmployeeSummary/issues"
+  },
+  "homepage": "https://github.com/ashkiani/TemplateEngine-EmployeeSummary#readme",
+  "dependencies": {
+    "jest": "^25.1.0"
+  }
+}
