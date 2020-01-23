@@ -1,34 +1,57 @@
 const Employee = require("../lib/employee");
+const validation = require("../lib/validation");
+const Validator = new validation();
+
+function generateEmployeeObject(employeeParameters) {
+    return new Employee(employeeParameters.name, employeeParameters.id, employeeParameters.title, employeeParameters.email);
+}
 
 describe("Employee", () => {
+    const validData = { "name": "Test Name", "id": 1, "title": "Tester", "email": "test@testers.com" };
+    const invalidData = { "name": "", "id": "", "title": "", "email": "" };
+
     describe("Initialization", () => {
-        it("should create an object with a name, id and title if provided valid arguments", () => {
-            const name = "Test Name";
-            const id = 1;
-            const title = "Tester";
-            const obj = new Employee(name, id, title);
-            expect(obj.name).toEqual(name);
-            expect(obj.id).toEqual(id);
-            expect(obj.title).toEqual(title);
+        it("should create an object with a name, id, title and email if provided valid arguments", () => {
+            const obj = generateEmployeeObject(validData);
+            expect(obj.name).toEqual(validData.name);
+            expect(obj.id).toEqual(validData.id);
+            expect(obj.title).toEqual(validData.title);
+            expect(obj.email).toEqual(validData.email);
         });
 
         it("should throw an error if not provided a name", () => {
             // Arrange
-            const err = new Error(
-                "Expected parameter 'name' to be a non empty string"
-            );
-
+            const cb = () => generateEmployeeObject(invalidData);
+            const err = new Error(Validator.invalidStringMessage("name"));
             // Assert
-            expect(new Employee("", 1, "Tester")).toThrowError(err);
+            expect(cb).toThrowError(err);
         });
-        
+
+        it("should throw an error if not provided a id", () => {
+            // Arrange
+            const cb = () => new Employee(validData.name, invalidData.id, validData.title, validData.email);
+            const err = new Error(Validator.invalidIdMessage());
+            // Assert
+            expect(cb).toThrowError(err);
+        });
+
+        it("should throw an error if not provided a title", () => {
+            // Arrange
+            const cb = () => new Employee(validData.name, validData.id, invalidData.title, validData.email);
+            const err = new Error(Validator.invalidStringMessage("title"));
+            // Assert
+            expect(cb).toThrowError(err);
+        });
+
+        it("should throw an error if not provided a valid email address", () => {
+            // Arrange
+            const cb = () => new Employee(validData.name, validData.id, validData.title, invalidData.email);
+            const err = new Error(Validator.invalidEmailMessage());
+            // Assert
+            expect(cb).toThrowError(err);
+        });
     });
 
-    // describe("another feature", () => {
-    //     it("should ...", () => {
-            
-    //     });
-    // });
+ 
 
-    
 });
