@@ -22,7 +22,7 @@ describe("Employee", () => {
         it("should throw an error if not provided a name", () => {
             // Arrange
             const cb = () => generateEmployeeObject(invalidData);
-            const err = new Error(Validator.invalidStringMessage("name"));
+            const err = new Error(Validator.invalidNameMessage());
             // Assert
             expect(cb).toThrowError(err);
         });
@@ -38,7 +38,7 @@ describe("Employee", () => {
         it("should throw an error if not provided a title", () => {
             // Arrange
             const cb = () => new Employee(validData.name, validData.id, invalidData.title, validData.email);
-            const err = new Error(Validator.invalidStringMessage("title"));
+            const err = new Error(Validator.invalidTitleMessage());
             // Assert
             expect(cb).toThrowError(err);
         });
