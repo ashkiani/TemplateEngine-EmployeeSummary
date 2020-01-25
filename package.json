@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/ashkiani/TemplateEngine-EmployeeSummary#readme",
   "dependencies": {
+    "inquirer": "^7.0.4",
     "jest": "^25.1.0"
   }
 }
