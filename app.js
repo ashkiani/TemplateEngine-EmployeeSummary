@@ -74,6 +74,19 @@ async function AskTeamQuestions() {
     });
 }
 
+function getUpdatedTemplateWithCommonFields(member) {
+    let role = member.getRole()
+    let roleLower = role.toLowerCase();
+    let file = "./templates/" + roleLower + ".html";
+    let htmlTemplateData = fs.readFileSync(file, member);
+    let htmlTemplateText = htmlTemplateData.toString();
+    htmlTemplateText = htmlTemplateText.replace("--" + roleLower + "Name--", member.name);
+    htmlTemplateText = htmlTemplateText.replace("--role--", role);
+    htmlTemplateText = htmlTemplateText.replace("--id--", member.id);
+    htmlTemplateText = htmlTemplateText.replace("--email--", member.email);
+    return htmlTemplateText;
+}
+
 function generateHtmlDoc() {
     let htmlTeamData = fs.readFileSync("./templates/team.html");
     let htmlTeamText = htmlTeamData.toString();
@@ -81,32 +94,17 @@ function generateHtmlDoc() {
     team.forEach(member => {
         switch (member.getRole()) {
             case "Manager":
-                let htmlManagerData = fs.readFileSync("./templates/manager.html");
-                let htmlManagerText = htmlManagerData.toString();
-                htmlManagerText = htmlManagerText.replace("--managerName--", member.name);
-                htmlManagerText = htmlManagerText.replace("--role--", member.getRole());
-                htmlManagerText = htmlManagerText.replace("--id--", member.id);
-                htmlManagerText = htmlManagerText.replace("--email--", member.email);
+                let htmlManagerText = getUpdatedTemplateWithCommonFields(member);
                 htmlManagerText = htmlManagerText.replace("--officeNumber--", member.officeNumber);
                 htmlTeamText = htmlTeamText.replace("--Manager--", htmlManagerText);
                 break;
             case "Engineer":
-                let htmlEngineerData = fs.readFileSync("./templates/engineer.html");
-                let htmlEngineerText = htmlEngineerData.toString();
-                htmlEngineerText = htmlEngineerText.replace("--engineerName--", member.name);
-                htmlEngineerText = htmlEngineerText.replace("--role--", member.getRole());
-                htmlEngineerText = htmlEngineerText.replace("--id--", member.id);
-                htmlEngineerText = htmlEngineerText.replace("--email--", member.email);
-                htmlEngineerText = htmlEngineerText.replace("--gitHub--", member.gitHub);
+                let htmlEngineerText = getUpdatedTemplateWithCommonFields(member);
+                htmlEngineerText = htmlEngineerText.replace("--gitHub--", member.github);
                 members.push(htmlEngineerText);
                 break;
             case "Intern":
-                let htmlInternData = fs.readFileSync("./templates/intern.html");
-                let htmlInternText = htmlInternData.toString();
-                htmlInternText = htmlInternText.replace("--internName--", member.name);
-                htmlInternText = htmlInternText.replace("--role--", member.getRole());
-                htmlInternText = htmlInternText.replace("--id--", member.id);
-                htmlInternText = htmlInternText.replace("--email--", member.email);
+                let htmlInternText = getUpdatedTemplateWithCommonFields(member);
                 htmlInternText = htmlInternText.replace("--university--", member.school);
                 members.push(htmlInternText);
                 break;
