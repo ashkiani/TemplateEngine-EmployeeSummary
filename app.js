@@ -3,6 +3,11 @@ const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 const inquirer = require('inquirer');
+var fs = require("fs");
+
+
+
+
 let prompts = new Prompts();
 require('events').EventEmitter.defaultMaxListeners = 15;
 
@@ -69,9 +74,27 @@ async function AskTeamQuestions() {
             for (let i = 0; i < response.headCount; i++) {
                 await AskTeamMemberInfo();
             }
-            //console.log(team);
+            generateHtmlDoc();
+
         });
     });
+}
+
+function generateHtmlDoc() {
+    let htmlTeamData = fs.readFileSync("./templates/team.html");
+    let htmlTeamText = htmlTeamData.toString();
+    console.log(team[0]);
+    let htmlManageData = fs.readFileSync("./templates/manager.html");
+    let htmlManagerText = htmlManageData.toString();
+    htmlManagerText = htmlManagerText.replace("--managerName--", team[0].name);
+    htmlManagerText = htmlManagerText.replace("--role--", team[0].getRole());
+    htmlManagerText = htmlManagerText.replace("--id--", team[0].id);
+    htmlManagerText = htmlManagerText.replace("--email--", team[0].email);
+    htmlManagerText = htmlManagerText.replace("--officeNumber--", team[0].officeNumber);
+
+    htmlTeamText = htmlTeamText.replace("--Manager--", htmlManagerText);
+
+    fs.writeFileSync("./output/team.html", htmlTeamText);
 }
 
 console.log("You will be prompted to build an engineering team. An engineering team consists of a manager, and any number of engineers and interns. ");
