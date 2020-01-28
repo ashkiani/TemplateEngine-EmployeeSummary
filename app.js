@@ -127,8 +127,9 @@ function generateHtmlDoc() {
         membersString += '</div>'
     }
     htmlTeamText = htmlTeamText.replace("--Team--", membersString);
-
-    fs.writeFileSync("./output/team.html", htmlTeamText);
+    let fileName = "./output/team.html";
+    fs.writeFileSync(fileName, htmlTeamText);
+    console.log("HTML file created: " + fileName);
 }
 
 console.log("You will be prompted to build an engineering team. An engineering team consists of a manager, and any number of engineers and interns. ");
