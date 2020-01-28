@@ -78,6 +78,10 @@ describe("Intern", () => {
             const obj = generateInternObject(validData);
             expect(obj.getEmail()).toEqual(validData.email);
         });
+        it("should return the school", () => {
+            const obj = generateInternObject(validData);
+            expect(obj.getSchool()).toEqual(validData.school);
+        });
         it("should return the Intern role", () => {
             const obj = generateInternObject(validData);
             expect(obj.getRole()).toEqual("Intern");

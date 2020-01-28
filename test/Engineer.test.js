@@ -78,6 +78,10 @@ describe("Engineer", () => {
             const obj = generateEngineerObject(validData);
             expect(obj.getEmail()).toEqual(validData.email);
         });
+        it("should return the GitHub username", () => {
+            const obj = generateEngineerObject(validData);
+            expect(obj.getGithub()).toEqual(validData.github);
+        });
         it("should return the Engineer role", () => {
             const obj = generateEngineerObject(validData);
             expect(obj.getRole()).toEqual("Engineer");
