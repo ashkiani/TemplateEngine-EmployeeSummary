@@ -16,7 +16,8 @@ Software engineering team generator command line application. The application wi
 ## Setup/Installation Requirements
 ​
 * Clone this repository.
-
+* run command: npm install
+* run command: node app.js
 ​
 ​
 ## Known Bugs
@@ -34,7 +35,8 @@ Node.js
 ​
 ## Contribution Guidlines 
 ​
-Direct link to site: 
+Direct link to repo: https://github.com/ashkiani/TemplateEngine-EmployeeSummary
+Demo: https://drive.google.com/file/d/1B5mom_VUP6Ha8a3hHtD7tVttbRyYa35b/view?usp=sharing
 
 ​
 ### License
